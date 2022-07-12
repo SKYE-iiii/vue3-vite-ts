@@ -1,39 +1,111 @@
-# vue3+vite+typescript
+##    Vue3 + Typescript + vite 二次封装 element组件
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## 一. 使用vite搭建项目 
 
-#### 软件架构
-软件架构说明
+1. 查看当前 npm 版本 : npm -v
+2. 使用对应的命令行搭建项目
+
+```javascript
+vite 官网 : https://vitejs.cn/
+# npm 6.x
+npm init vite@latest my-vue-app --template vue-ts
+
+# npm 7+, 需要额外的双横线：
+npm init vite@latest my-vue-app -- --template vue
+
+# yarn
+yarn create vite my-vue-app --template vue
+
+# pnpm
+pnpm create vite my-vue-app -- --template vue
+
+```
+
+ 3. 进入项目, 使用 cnpm 安装依赖 :
+
+    	1. 查看cnpm是否安装 : cnpm -v 
+
+ 4.  修改 端口号 为 8080 
+
+    ```javascript
+    vite.config.js :
+    
+    export default defineConfig({
+      server: {
+        port: 8080,
+      },
+    });
+    ```
+
+  	5. 启动项目 : npm run dev
 
 
-#### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 二. 安装项目基础依赖 及 配置
 
-#### 使用说明
+1.  Vue路由 
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+   - cnpm i -S vue-router@next
 
-#### 参与贡献
+     ```typescript
+     项目配置 ：src/router/index
+     import {creatRouter,createWebHashHistory,RouteRecordRaw} from "vue-router"
+     // 此处会出现报错信息 找不到模块“../views/Home;”或其相应的类型声明 解决方法见下方 ps
+     // import Home from "../views/home"   配置d.ts文件后,引入vue文件需加上.vue后缀
+     import Home from "../views/home.vue"  
+     const routes:RouteRecordRaw[]=[{
+         path:'/',
+         component:Home
+     }]
+     
+     const router=creatRouter({
+         history:createWebHashHistory(),
+         routes
+     })
+     export routes
+     
+     项目配置 ：main.ts
+     import router from "./router/index.ts"
+     const app = creatApp(app)
+     app.use(router).mount(#app)
+     
+     项目配置 ：App.vue
+     <template>
+       <router-view></router-view>
+     </template>
+     ```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+     ps： 报错解决方法如下 
 
+     ```typescript
+     项目配置 : env.d.ts (与main.ts同级目录下新建)
+     declare module "*.vue" {
+       import type { DefineComponent } from "vue";
+       // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+       const component: DefineComponent<{}, {}, any>;
+       export default component;
+     }
+     ```
 
-#### 特技
+     
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+2. Element-plus  https://element-plus.gitee.io/zh-CN/guide/quickstart.html
+
+   - cnpm i -S element-plus
+
+   ```typescript
+   项目配置 : main.ts
+   import ElementPlus from 'element-plus'
+   import 'element-plus/dist/index.css'
+   app.use(ElementPlus)
+   ```
+
+   
+
+3.  sass sass-loader
+
+   - cnpm i -D sass sass-loader
+
+    
+
+## 三.  全局注册图标组件
