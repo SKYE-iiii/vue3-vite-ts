@@ -109,3 +109,32 @@ pnpm create vite my-vue-app -- --template vue
     
 
 ## 三.  全局注册图标组件
+
+1.  element-plus 的 icon 图标需要单独进行安装 ：
+
+   - npm install @element-plus/icons-vue
+
+   ```typescript
+   项目配置 : main.ts
+   import * as Icons from "@element-plus/icons-vue"
+   
+   // 注册为全局组件
+   for(let i in Icons){
+   	// (Icons as any)[i] icon组件实例对象
+   	app.component(i,(Icons as any)[i])
+   }
+   
+   // 配置icon名称转大驼峰命名的公用方法 :
+   项目配置 :  src/utils/index.ts
+   export default toLine = (v:string) => {
+   	return v.replace(/(A-Z)g/,'-$1').toLocaleLowerCase()
+   }
+   
+   // 将icons组件名转换为 el-icon-xx ； 
+   import {toLine} from "./utils"
+   for(let i in Icons){
+   	app.component(`el-icon-${toLine(i)}`,(Icons as any)[i])
+   }
+   ```
+
+   
