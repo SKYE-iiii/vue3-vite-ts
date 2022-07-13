@@ -106,7 +106,37 @@ pnpm create vite my-vue-app -- --template vue
 
    - cnpm i -D sass sass-loader
 
-    
+   
+   
+4. 项目别名配置
+
+```typescript
+项目配置 : vite.config.ts
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': '/src/',
+      '@components': '/src/components/',
+      '@assets': '/src/assets/',
+    },
+  },
+})
+
+项目配置 : ts.config.ts
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"]
+    }
+  },
+}
+
+```
+
+
 
 ## 三.  全局注册图标组件
 
@@ -137,4 +167,6 @@ pnpm create vite my-vue-app -- --template vue
    }
    ```
 
+   ## 四. 伸缩菜单
+   
    

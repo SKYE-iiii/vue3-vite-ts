@@ -9,6 +9,9 @@ import 'element-plus/dist/index.css'
 // 引入icons
 import * as Icons from '@element-plus/icons-vue'
 
+// 引入样式
+import '@/styles/reset.scss' // 导入reset 样式
+
 const app = createApp(App)
 
 // 全局注册icons组件
