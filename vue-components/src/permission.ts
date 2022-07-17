@@ -22,11 +22,4 @@ router.beforeEach((to, from, next) => {
       next('/login')
     }
   }
-  // if (whiteList.includes(to.path)) {
-  //   console.log(store.getters.token, '999')
-
-  //   next()
-  // } else {
-  //   next('/login')
-  // }
 })
