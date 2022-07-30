@@ -1,8 +1,17 @@
+<!--
+ * @Description: 
+ * @Author: zyj
+ * @Date: 2022-07-22 15:53:22
+ * @LastEditors: zyj
+ * @LastEditTime: 2022-07-28 09:54:30
+ * @FilePath: /vue-components/src/views/layout/components/sidebar/AsideMenu.vue
+ * 
+-->
 <template>
   <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
-    :collapse="store.getters.isCollapse"
+    :collapse="layoutStore.getIsCollapse"
     router
   >
     <el-menu-item index="/three">
@@ -21,11 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { Menu as IconMenu, Setting } from "@element-plus/icons-vue";
-
-import { useStore } from "vuex";
-const store = useStore();
+import { useLayoutStore } from "@/store/modules/layout";
+const layoutStore = useLayoutStore();
 </script>
 
 <style lang="scss" scoped>

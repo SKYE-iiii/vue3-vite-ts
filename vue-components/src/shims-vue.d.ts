@@ -8,3 +8,4 @@ declare module '*.vue' {
 }
 
 declare module 'mockjs'
+declare module "@types/three";

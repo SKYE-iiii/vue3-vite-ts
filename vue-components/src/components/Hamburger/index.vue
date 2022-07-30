@@ -1,16 +1,16 @@
 <template>
   <div class="hamburger-container" @click="toggleClick">
-    <el-icon-expand v-if="store.getters.isCollapse"></el-icon-expand>
+    <el-icon-expand v-if="layoutStore.getIsCollapse"></el-icon-expand>
     <el-icon-fold v-else></el-icon-fold>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStore } from "vuex"
-const store = useStore()
+import { useLayoutStore } from "@/store/modules/layout";
+const layoutStore = useLayoutStore();
 const toggleClick = () => {
-  store.commit('layout/setCollapse')
-}
+  layoutStore.setCollapse();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -23,7 +23,7 @@ const toggleClick = () => {
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(135, 206, 235, .7);
+    background-color: rgba(135, 206, 235, 0.7);
   }
 }
 </style>

@@ -5,13 +5,12 @@
 </template>
 
 <script setup lang="ts">
-import Hamburger from "@/components/Hamburger/index.vue"
-
+import Hamburger from "@/components/Hamburger/index.vue";
 </script>
 
 <style lang="scss" scoped>
 .nav-header-container {
   height: 60px;
-  background-color: pink;
+  background-color: #fff;
 }
 </style>

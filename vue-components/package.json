@@ -13,14 +13,16 @@
     "axios": "^0.27.2",
     "element-plus": "^2.2.9",
     "mockjs": "^1.1.0",
+    "pinia": "^2.0.17",
+    "three": "^0.142.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.13",
-    "vuex": "4.0.2"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@types/three": "^0.142.0",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
+    "@vitejs/plugin-vue": "^2.3.3",
     "eslint": "^8.13.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",

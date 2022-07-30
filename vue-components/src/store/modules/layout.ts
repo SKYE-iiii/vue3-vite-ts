@@ -1,14 +1,27 @@
-/**
- * layout 相关
+/*
+ * @Description:
+ * @Author: zyj
+ * @Date: 2022-07-22 15:53:22
+ * @LastEditors: zyj
+ * @LastEditTime: 2022-07-28 15:22:47
+ * @FilePath: /vue-components/src/store/modules/layout.ts
  *
  */
-export default {
-  namespaced: true,
-  state: () => ({ isCollapse: false }),
-  mutations: {
-    setCollapse(state: any) {
-      state.isCollapse = !state.isCollapse
+
+import { defineStore } from "pinia";
+
+export const useLayoutStore = defineStore("layout", {
+  state: () => {
+    return { isCollapse: false };
+  },
+  actions: {
+    setCollapse() {
+      this.isCollapse = !this.isCollapse;
     },
   },
-  actions: {},
-}
+  getters: {
+    getIsCollapse(state) {
+      return state.isCollapse;
+    },
+  },
+});
