@@ -23,7 +23,7 @@ const toggleClick = () => {
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(135, 206, 235, 0.7);
+    background-color: hsla(192, 22%, 95%, 0.97);
   }
 }
 </style>

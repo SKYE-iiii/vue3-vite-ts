@@ -9,14 +9,18 @@
 -->
 <template>
   <div class="nav-header-container">
-    <div class="left"><Hamburger /></div>
-    <div class="right"><Avatar /></div>
+    <div class="left">
+      <Hamburger />
+    </div>
+    <div class="right">
+      <Avatar />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Hamburger from "@/components/Hamburger/index.vue";
-import Avatar from "@/components/Avatar/index.vue";
+import Avatar from "@/components/Avatar/index.vue"
 </script>
 
 <style lang="scss" scoped>
@@ -27,5 +31,12 @@ import Avatar from "@/components/Avatar/index.vue";
   align-items: center;
   background-color: #fff;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
+
+  .left,
+  .right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

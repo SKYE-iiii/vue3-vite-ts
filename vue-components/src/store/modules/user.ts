@@ -8,35 +8,41 @@
  *
  */
 
-import { defineStore } from "pinia";
-import { TOKEN } from "@/constant/index";
-import { login_api } from "@/apis/user";
-import { setLocalItem, getLocalItem } from "@/utils/storage";
-export const useUserStore = defineStore("user", {
+import { defineStore } from 'pinia'
+import { TOKEN } from '@/constant/index'
+import { login_api } from '@/apis/user'
+import { setLocalItem, getLocalItem, clearLocalItem } from '@/utils/storage'
+import router from '@/router'
+export const useUserStore = defineStore('user', {
   state: () => {
     return {
-      token: getLocalItem(TOKEN) || "",
-    };
+      token: getLocalItem(TOKEN) || '',
+    }
   },
   actions: {
     async onLogin(params: object) {
-      console.log(params);
       return new Promise((resolve, reject) => {
         login_api(params)
           .then((res) => {
-            this.token = res.data.token;
-            setLocalItem(TOKEN, res.data.token);
-            resolve(res.data);
+            this.token = res.data.token
+            setLocalItem(TOKEN, res.data.token)
+            resolve(res.data)
           })
           .catch((err) => {
-            reject(err);
-          });
-      });
+            reject(err)
+          })
+      })
+    },
+
+    logout() {
+      clearLocalItem()
+      this.token = ''
+      router.push('/login')
     },
   },
   getters: {
     getStore(state) {
-      return state.token;
+      return state.token
     },
   },
-});
+})

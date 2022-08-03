@@ -1,31 +1,51 @@
-<!--
- * @Description: 
- * @Author: zyj
- * @Date: 2022-07-29 15:23:34
- * @LastEditors: zyj
- * @LastEditTime: 2022-07-29 15:31:03
- * @FilePath: /vue-components/src/components/avatar/index.vue
- * 
--->
 <template>
-  <el-dropdown>
+  <el-dropdown class="avatar" trigger="click" @command="handleCommand">
     <span class="el-dropdown-link">
-      Dropdown List
-      <el-icon-arrow-down> </el-icon-arrow-down>
+      <el-avatar shape="square" :size="40" :src="avatarUrl" />
+      <el-icon-arrowdown class="ml10"></el-icon-arrowdown>
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>Action 1</el-dropdown-item>
-        <el-dropdown-item>Action 2</el-dropdown-item>
-        <el-dropdown-item>Action 3</el-dropdown-item>
-        <el-dropdown-item disabled>Action 4</el-dropdown-item>
-        <el-dropdown-item divided>Action 5</el-dropdown-item>
+        <el-dropdown-item command="toProfile">个人中心</el-dropdown-item>
+        <el-dropdown-item command="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
 
-<script lang="ts">
-import { reactive, ref } from "vue";
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store/modules/user'
+const router = useRouter()
+const userStore = useUserStore()
+
+const avatarUrl = ref(
+  'https://img2.baidu.com/it/u=414494141,4139921804&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+)
+
+const handleCommand = (command: string | number | object) => {
+  switch (command) {
+    case 'toProfile':
+      toProfile()
+      break
+    case 'logout':
+      logout()
+      break
+  }
+}
+
+const toProfile = () => {
+  router.push('/profile')
+}
+
+const logout = () => {
+  userStore.logout()
+}
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.avatar {
+  margin-right: 30px;
+  cursor: pointer;
+}
+</style>
