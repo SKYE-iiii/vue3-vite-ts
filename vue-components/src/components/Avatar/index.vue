@@ -1,7 +1,16 @@
+<!--
+ * @Description: 头像下拉组件
+ * @Author: zyj
+ * @Date: 2022-08-03 14:19:38
+ * @LastEditors: zyj
+ * @LastEditTime: 2022-08-04 15:30:37
+ * @FilePath: /vue-components/src/components/Avatar/index.vue
+ * 
+-->
 <template>
   <el-dropdown class="avatar" trigger="click" @command="handleCommand">
     <span class="el-dropdown-link">
-      <el-avatar shape="square" :size="40" :src="avatarUrl" />
+      <el-avatar shape="square" :size="40" :src="userStore.avatar" />
       <el-icon-arrowdown class="ml10"></el-icon-arrowdown>
     </span>
     <template #dropdown>
@@ -14,34 +23,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store/modules/user'
-const router = useRouter()
-const userStore = useUserStore()
-
-const avatarUrl = ref(
-  'https://img2.baidu.com/it/u=414494141,4139921804&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-)
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/modules/user";
+const router = useRouter();
+const userStore = useUserStore();
 
 const handleCommand = (command: string | number | object) => {
   switch (command) {
-    case 'toProfile':
-      toProfile()
-      break
-    case 'logout':
-      logout()
-      break
+    case "toProfile":
+      toProfile();
+      break;
+    case "logout":
+      logout();
+      break;
   }
-}
+};
 
 const toProfile = () => {
-  router.push('/profile')
-}
+  router.push("/profile");
+};
 
 const logout = () => {
-  userStore.logout()
-}
+  userStore.logout();
+};
 </script>
 <style scoped lang="scss">
 .avatar {

@@ -8,71 +8,83 @@
       class="demo-ruleForm login-form"
       :size="formSize"
       status-icon
+      @keyup.enter.native="submitForm(ruleFormRef)"
     >
       <el-form-item prop="account">
-        <el-input v-model="loginForm.account" clearable prefix-icon="el-icon-avatar" />
+        <el-input
+          v-model="loginForm.account"
+          clearable
+          prefix-icon="el-icon-avatar"
+        />
       </el-form-item>
       <el-form-item prop="pwd">
-        <el-input v-model="loginForm.pwd" clearable type="password" prefix-icon="el-icon-lock" />
+        <el-input
+          v-model="loginForm.pwd"
+          clearable
+          type="password"
+          prefix-icon="el-icon-lock"
+        />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)"
+          >登录</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import type { FormInstance, FormRules } from 'element-plus'
+import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+import type { FormInstance, FormRules } from "element-plus";
 
-import { useUserStore } from '@/store/modules/user'
+import { useUserStore } from "@/store/modules/user";
 
-const userStore = useUserStore()
-const router = useRouter()
+const userStore = useUserStore();
+const router = useRouter();
 
-const formSize = ref('default')
-const ruleFormRef = ref<FormInstance>()
+const formSize = ref("default");
+const ruleFormRef = ref<FormInstance>();
 const loginForm = reactive({
-  account: 'admin',
-  pwd: '123456',
-})
+  account: "admin",
+  pwd: "123456",
+});
 
 const rules = reactive<FormRules>({
-  account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   pwd: [
     {
       required: true,
-      message: '请输入密码',
-      trigger: 'blur',
+      message: "请输入密码",
+      trigger: "blur",
     },
   ],
-})
+});
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
       userStore
         .onLogin(loginForm)
         .then((res) => {
-          router.push('/')
+          router.push("/");
         })
         .catch((err) => {
-          console.log(err, 'catch')
-        })
+          console.log(err, "catch");
+        });
     } else {
-      console.log('error submit!', fields)
+      console.log("error submit!", fields);
     }
-  })
-}
+  });
+};
 </script>
 
 <style lang="scss" scoped>
 .login-container {
   height: 100%;
-  background: url('../../assets/bg.jpg') no-repeat;
+  background: url("../../assets/bg.jpg") no-repeat;
   background-size: cover;
   position: relative;
 

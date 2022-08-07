@@ -3,7 +3,7 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-07-28 15:22:47
+ * @LastEditTime: 2022-08-04 15:16:25
  * @FilePath: /vue-components/src/store/modules/layout.ts
  *
  */
@@ -19,9 +19,5 @@ export const useLayoutStore = defineStore("layout", {
       this.isCollapse = !this.isCollapse;
     },
   },
-  getters: {
-    getIsCollapse(state) {
-      return state.isCollapse;
-    },
-  },
+  getters: {},
 });

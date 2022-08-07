@@ -3,7 +3,7 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-07-29 10:11:47
+ * @LastEditTime: 2022-08-04 16:15:49
  * @FilePath: /vue-components/src/router/index.ts
  *
  */
@@ -23,11 +23,19 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/profile",
         name: "profile",
+        meta: {
+          title: "profile",
+          icon: "Avatar",
+        },
         component: () => import("@/views/profile/index.vue"),
       },
       {
         path: "/three",
         name: "three",
+        meta: {
+          title: "three",
+          icon: "",
+        },
         component: () => import("@/views/three/index.vue"),
       },
     ],
@@ -37,9 +45,41 @@ const routes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
+        path: "/system/department",
+        name: "department",
+        meta: {
+          title: "department",
+          icon: "",
+        },
+        component: () => import("@/views/system/department/index.vue"),
+      },
+      {
+        path: "/system/user",
+        name: "user",
+        meta: {
+          title: "user",
+          icon: "",
+        },
+        component: () => import("@/views/system/user/index.vue"),
+      },
+
+      {
         path: "/system/role",
         name: "role",
+        meta: {
+          title: "role",
+          icon: "",
+        },
         component: () => import("@/views/system/role/index.vue"),
+      },
+      {
+        path: "/system/menu",
+        name: "menu",
+        meta: {
+          title: "menu",
+          icon: "",
+        },
+        component: () => import("@/views/system/menu/index.vue"),
       },
     ],
   },

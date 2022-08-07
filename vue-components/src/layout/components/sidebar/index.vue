@@ -3,21 +3,21 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-07-28 15:33:33
- * @FilePath: /vue-components/src/views/layout/components/sidebar/index.vue
+ * @LastEditTime: 2022-08-04 15:12:00
+ * @FilePath: /vue-components/src/layout/components/sidebar/index.vue
  * 
 -->
 <template>
   <div class="sidebar-container">
     <div
       :class="
-        layoutStore.getIsCollapse
+        layoutStore.isCollapse
           ? 'avatar-name-container hiddenSidebar'
           : 'avatar-name-container showSidebar'
       "
     >
-      <el-avatar shape="square" :size="50" :src="avatarUrl" />
-      <span v-show="!layoutStore.getIsCollapse">account</span>
+      <el-avatar shape="square" :size="50" :src="userStore.avatar" />
+      <span v-show="!layoutStore.isCollapse">{{ userStore.nickName }}</span>
     </div>
 
     <aside-menu class="aside-menu" />
@@ -26,12 +26,11 @@
 
 <script setup lang="ts">
 import AsideMenu from "./AsideMenu.vue";
-import { ref } from "vue";
 import { useLayoutStore } from "@/store/modules/layout";
+import { useUserStore } from "@/store/modules/user";
+import { ref } from "vue";
 const layoutStore = useLayoutStore();
-const avatarUrl = ref(
-  "https://img2.baidu.com/it/u=414494141,4139921804&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-);
+const userStore = useUserStore();
 </script>
 
 <style lang="scss" scoped>

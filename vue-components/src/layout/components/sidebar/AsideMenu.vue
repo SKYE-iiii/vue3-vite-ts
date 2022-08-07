@@ -3,21 +3,22 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-07-28 09:54:30
- * @FilePath: /vue-components/src/views/layout/components/sidebar/AsideMenu.vue
+ * @LastEditTime: 2022-08-03 15:54:52
+ * @FilePath: /vue-components/src/layout/components/sidebar/AsideMenu.vue
  * 
 -->
 <template>
   <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
-    :collapse="layoutStore.getIsCollapse"
+    :collapse="layoutStore.isCollapse"
     router
   >
     <el-menu-item index="/three">
       <el-icon>
         <icon-menu />
       </el-icon>
+
       <template #title>ThreeJs</template>
     </el-menu-item>
     <el-menu-item index="4">

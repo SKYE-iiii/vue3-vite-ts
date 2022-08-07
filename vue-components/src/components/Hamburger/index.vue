@@ -1,6 +1,6 @@
 <template>
   <div class="hamburger-container" @click="toggleClick">
-    <el-icon-expand v-if="layoutStore.getIsCollapse"></el-icon-expand>
+    <el-icon-expand v-if="layoutStore.isCollapse"></el-icon-expand>
     <el-icon-fold v-else></el-icon-fold>
   </div>
 </template>

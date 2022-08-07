@@ -3,7 +3,7 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-07-29 16:16:15
+ * @LastEditTime: 2022-08-04 16:33:58
  * @FilePath: /vue-components/src/layout/components/NavHeader.vue
  * 
 -->
@@ -11,6 +11,7 @@
   <div class="nav-header-container">
     <div class="left">
       <Hamburger />
+      <Breadcrumb />
     </div>
     <div class="right">
       <Avatar />
@@ -20,7 +21,8 @@
 
 <script setup lang="ts">
 import Hamburger from "@/components/Hamburger/index.vue";
-import Avatar from "@/components/Avatar/index.vue"
+import Breadcrumb from "@/components/Breadcrumb/index.vue";
+import Avatar from "@/components/Avatar/index.vue";
 </script>
 
 <style lang="scss" scoped>
