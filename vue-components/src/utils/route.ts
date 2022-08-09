@@ -58,7 +58,7 @@ export const generatorMenu = (routes: Array<RouteRecordNormalized>): any => {
     if (isNull(route.children) && isNull(route.meta)) return;
     // 有children && 没有meta
     if (!isNull(route.children) && isNull(route.meta)) {
-      if (route.children) result.push(...generatorMenu(route.children));
+      // if (route.children) result.push(...generatorMenu(route.children));
     }
     console.log(route, "route");
 

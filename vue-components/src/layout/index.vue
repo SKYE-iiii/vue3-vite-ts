@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import Sidebar from "./components/sidebar/index.vue";
-import NavHeader from "./components/NavHeader.vue";
+import Sidebar from './components/sidebar/index.vue'
+import NavHeader from './components/NavHeader.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +30,10 @@ import NavHeader from "./components/NavHeader.vue";
 
     .el-header {
       padding: 0;
+    }
+    .el-main {
+      overflow-x: hidden;
+      box-sizing: border-box;
     }
   }
 }
