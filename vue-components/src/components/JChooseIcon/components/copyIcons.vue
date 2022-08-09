@@ -1,8 +1,28 @@
+<!--
+ * @Description: 图标选择弹窗
+ * @Author: zyj
+ * @Date: 2022-08-08 16:20:12
+ * @LastEditors: zyj
+ * @LastEditTime: 2022-08-08 16:40:42
+ * @FilePath: /vue-components/src/components/JChooseIcon/components/copyIcons.vue
+ * 
+-->
 <template>
-  <el-dialog draggable :model-value="visible" :title="title" width="42%" @close="handleClose">
+  <el-dialog
+    draggable
+    :model-value="visible"
+    :title="title"
+    width="42%"
+    @close="handleClose"
+  >
     <el-scrollbar height="400px">
       <div class="icons-container">
-        <div v-for="(v, i) in Object.keys(Icons)" :key="i" class="icon" @click="copyIcon(v)">
+        <div
+          v-for="(v, i) in Object.keys(Icons)"
+          :key="i"
+          class="icon"
+          @click="copyIcon(v)"
+        >
           <component :is="`el-icon-${toLine(v)}`"></component>
           <span class="icon-text"> {{ `el-icon-${toLine(v)}` }}</span>
         </div>
@@ -12,31 +32,32 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue' // 引入icons
-import * as Icons from '@element-plus/icons-vue'
-import { toLine } from '@/utils'
-import { copy } from '@/hooks'
+import { defineProps, defineEmits } from "vue"; // 引入icons
+import * as Icons from "@element-plus/icons-vue";
+import { toLine } from "@/utils";
+import { copy } from "@/hooks";
 let props = defineProps({
   title: {
     type: String,
-    default: '选择图标',
+    default: "选择图标",
   },
   visible: {
     type: Boolean,
     default: false,
   },
-})
-const emits = defineEmits(['update:visible'])
+});
+const emits = defineEmits(["update:visible"]);
 const handleClose = () => {
-  emits('update:visible', false)
-}
+  emits("update:visible", false);
+};
 
 const copyIcon = (v: string) => {
-  const tagName = `<el-icon-${toLine(v)} />`
-  copy(tagName, '标签复制成功')
+  const tagName = `<el-icon-${toLine(v)} />`;
+  console.log(tagName, "tag");
+  copy(tagName, "标签复制成功");
   // 复制完成 关闭弹窗
-  handleClose()
-}
+  handleClose();
+};
 </script>
 
 <style scoped lang="scss">

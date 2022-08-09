@@ -3,7 +3,7 @@
  * @Author: zyj
  * @Date: 2022-07-22 15:53:22
  * @LastEditors: zyj
- * @LastEditTime: 2022-08-03 15:54:52
+ * @LastEditTime: 2022-08-09 16:43:23
  * @FilePath: /vue-components/src/layout/components/sidebar/AsideMenu.vue
  * 
 -->
@@ -14,26 +14,25 @@
     :collapse="layoutStore.isCollapse"
     router
   >
-    <el-menu-item index="/three">
-      <el-icon>
-        <icon-menu />
-      </el-icon>
-
-      <template #title>ThreeJs</template>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon>
-        <setting />
-      </el-icon>
-      <template #title>Navigator Four</template>
-    </el-menu-item>
+    <siderbar-item />
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import { Menu as IconMenu, Setting } from "@element-plus/icons-vue";
+import SiderbarItem from "./SiderbarItem.vue";
 import { useLayoutStore } from "@/store/modules/layout";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
+import { filterRoutes, generatorMenu } from "@/utils/route";
+
 const layoutStore = useLayoutStore();
+const router = useRouter();
+const menuList = () => {
+  const filterRouteList = filterRoutes(router.getRoutes());
+  const res = generatorMenu(filterRouteList);
+  console.log(res, "res");
+};
+menuList();
 </script>
 
 <style lang="scss" scoped>
