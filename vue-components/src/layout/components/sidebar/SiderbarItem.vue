@@ -9,21 +9,28 @@
 -->
 <template>
   <!-- 有子集菜单渲染 -->
-  <el-sub-menu index="1">
+  <el-sub-menu :index="route.path" v-if="route.children?.length > 1">
     <template #title>
-      <menu-item></menu-item>
+      <menu-item :title="route.meta.title" :icon="route.meta.icon"></menu-item>
     </template>
-    <el-menu-item index="1-1">item one</el-menu-item>
+    <Siderbar-Item v-for="(item, i) in route.children" :key="i" :route="item" />
   </el-sub-menu>
   <!--  无子集菜单渲染 -->
-  <el-menu-item index="/three">
-    <menu-item></menu-item>
+  <el-menu-item :index="route.path" v-else>
+    <menu-item :title="route.meta.title" :icon="route.meta.icon"></menu-item>
   </el-menu-item>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import MenuItem from "./MenuItem.vue";
-
+import { defineProps } from 'vue'
+import MenuItem from './MenuItem.vue'
+import SiderbarItem from './SiderbarItem.vue'
+const props = defineProps({
+  route: {
+    type: Object,
+    default: {},
+  },
+})
+console.log(props.route, 'props')
 </script>
 <style scoped lang="scss"></style>

@@ -16,52 +16,52 @@
  *          1.获取所有的子路由
  *          2.根据子集路由去重
  */
-import { RouteRecordRaw, RouteRecordNormalized } from "vue-router";
+import { RouteRecordRaw, RouteRecordNormalized } from 'vue-router'
 
 // 获取所有的子集路由(只取子路由)
 const getChildrenRoutes = (routes: Array<RouteRecordNormalized>) => {
-  let result: any = [];
+  let result: any = []
   routes.forEach((v) => {
     if (v.children && v.children.length > 0) {
-      result.push(...v.children);
+      result.push(...v.children)
     }
-  });
+  })
 
-  return result;
-};
+  return result
+}
 
 // 根据子集路由对当前路由去重
 export const filterRoutes = (routes: Array<RouteRecordNormalized>) => {
-  const childrenRoutes = getChildrenRoutes(routes);
+  const childrenRoutes = getChildrenRoutes(routes)
   return routes.filter((route) => {
     return !childrenRoutes.find((childrenRoute: any) => {
-      return childrenRoute.path === route.path;
-    });
-  });
-};
+      return childrenRoute.path === route.path
+    })
+  })
+}
 
 // 判断空值
 const isNull = (data: any) => {
-  if (!data) return true;
-  if (JSON.stringify(data) === "{}") return true;
-  if (JSON.stringify(data) === "[]") return true;
-};
+  if (!data) return true
+  if (JSON.stringify(data) === '{}') return true
+  if (JSON.stringify(data) === '[]') return true
+}
 
-export const generatorMenu = (routes: Array<RouteRecordNormalized>): any => {
+export const generatorMenu = (routes: Array<RouteRecordRaw>): any => {
   /**
    * 1.
    */
-  console.log(routes, "routes");
+
   routes.forEach((route) => {
-    const result = [];
+    const result = []
     // 不存在children && 不存在 meta 直接return
-    if (isNull(route.children) && isNull(route.meta)) return;
+    if (isNull(route.children) && isNull(route.meta)) return
     // 有children && 没有meta
     if (!isNull(route.children) && isNull(route.meta)) {
-      // if (route.children) result.push(...generatorMenu(route.children));
+      if (route.children) result.push(...generatorMenu(route.children))
     }
-    console.log(route, "route");
+    console.log(route, 'route')
 
     // return result;
-  });
-};
+  })
+}

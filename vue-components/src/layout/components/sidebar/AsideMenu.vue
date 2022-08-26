@@ -9,30 +9,34 @@
 -->
 <template>
   <el-menu
-    default-active="2"
+    :default-active="activeMenu"
     class="el-menu-vertical-demo"
     :collapse="layoutStore.isCollapse"
     router
   >
-    <siderbar-item />
+    <siderbar-item v-for="(item, i) in menuList" :key="i" :route="item" />
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import SiderbarItem from "./SiderbarItem.vue";
-import { useLayoutStore } from "@/store/modules/layout";
-import { useRouter } from "vue-router";
-import { computed } from "vue";
-import { filterRoutes, generatorMenu } from "@/utils/route";
+import SiderbarItem from './SiderbarItem.vue'
+import { useLayoutStore } from '@/store/modules/layout'
+import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
+import { filterRoutes } from '@/utils/route'
 
-const layoutStore = useLayoutStore();
-const router = useRouter();
-const menuList = () => {
-  const filterRouteList = filterRoutes(router.getRoutes());
-  const res = generatorMenu(filterRouteList);
-  console.log(res, "res");
-};
-menuList();
+const layoutStore = useLayoutStore()
+const router = useRouter()
+const route = useRoute()
+const menuList = computed(() => {
+  const filterRouteList = filterRoutes(router.getRoutes())
+  const routes = filterRouteList.filter((v) => v.meta.isShow)
+  return routes
+})
+
+const activeMenu = computed(() => {
+  return route.path
+})
 </script>
 
 <style lang="scss" scoped>

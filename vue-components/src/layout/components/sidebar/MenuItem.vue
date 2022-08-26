@@ -8,22 +8,26 @@
  * 
 -->
 <template>
-  <component :is="icon"></component>
-  <span>{{ title }}</span>
+  <component :is="`el-icon-${toLine(icon)}`"></component>
+  <span class="ml4">{{ title }}</span>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
+import { defineProps } from 'vue'
+import { toLine } from '@/utils'
 const props = defineProps({
   title: {
     type: String,
-    default: "无标题",
+    default: '无标题',
   },
   icon: {
     type: String,
-    default: "el-icon-helpfilled",
+    default: 'el-icon-helpfilled',
   },
-});
+})
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.ml4 {
+  margin-left: 4px;
+}
+</style>
